@@ -26,6 +26,5 @@ export class AlbumsComponent implements OnInit {
     onAlbumSelect(album: Album) {
         this.albumsService.selectedAlbum.emit(album);
         this.trackService.loadSeletedAlbumTracks(album.tracks);
-        //console.log(album);
     }
 }
