@@ -8,8 +8,8 @@
     BirtDate: {{ artist.birthDate.toDateString() + '--' + artist.deathDate }}
 </P>
 <P>
-    Career: {{ artist.careerStart.toDateString}}
+    Career: {{ artist.careerStart.toDateString() + '--' + artist.careerEnd }}
 </P>
 <P>
-    <img />
+    <img data-src="{{ artist.artistPhoto }}" width="" height="" alt="" uk-img>
 </P>
