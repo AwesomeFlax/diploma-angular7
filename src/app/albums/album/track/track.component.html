@@ -1,5 +1,7 @@
 <div
- (click)="onTrackClick(track)"
+    class="row"
+    (click)="onTrackClick(track)"
 >
-    <p>{{ track.name }} </p>
+    <span class="uk-margin-small-right" uk-icon="icon: play; ratio: 1.5"></span>
+    {{ track.name }}
 </div>
