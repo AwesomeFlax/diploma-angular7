@@ -1,0 +1,10 @@
+<ul>
+  <li
+    *ngFor="let artist of artistList"
+    routerLink='/artist/{{ artist.id }}' routerLinkActive="router-link-active" 
+  >
+      <a (click)="onArtistClick(artist)">
+          {{ artist.nickName }} 
+      </a>
+  </li>
+</ul>

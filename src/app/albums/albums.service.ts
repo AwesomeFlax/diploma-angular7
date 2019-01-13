@@ -1,5 +1,5 @@
 import { Album } from './../models/album.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Track } from '../models/track.model';
 
 export class AlbumsService {
@@ -28,5 +28,10 @@ export class AlbumsService {
     getAlbumById(id: number)
     {
         return this.albums.filter(x => x.id == id)[0];
+    }
+
+    getAlbumsByArtist(id: number)
+    {
+        return this.albums.slice();
     }
 }
