@@ -21,8 +21,6 @@ export class ArtistsService {
         'Female', 'easy breazy', 'https://imgcache.qq.com/music/photo/mid_singer_500/p/x/003CoxJh1zFPpx.jpg', null)
     ];
 
-    constructor(private albumsService: AlbumsService) {}
-
     getArtists(): Artist[] 
     {
         return this.artists.slice();        
@@ -31,10 +29,5 @@ export class ArtistsService {
     getArtistsById(id: number): Artist 
     {
         return this.artists.filter(x => x.id === id)[0];        
-    }
-
-    getArtistsAlbums(id: number): Album[]
-    {
-        return this.albumsService.getAlbumsByArtist(id);
     }
 }
