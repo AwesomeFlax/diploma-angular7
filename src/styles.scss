@@ -59,11 +59,12 @@ display: inline-flex !important;
     display: flex !important;
 }
 .nav-item.nav-link{
-    color: #fff;
+    color: #114470;
     padding: 0 20px;
 }
 .nav-item.nav-link:hover, .nav-item:hover li {
-    color:#2b2b2d;
+    // color:#114470;
+    text-decoration: none;
 }
 .form-control {
     border: none;
@@ -72,10 +73,10 @@ display: inline-flex !important;
 }
 .nav.nav-tabs {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .BackToButton {
-    color: blueviolet;
+    color: #114470;
     padding: 13px;
 }
 .BackToButton:hover {
@@ -87,7 +88,13 @@ display: inline-flex !important;
 .col-lg-9 ul {
     display: flex;
     justify-content: space-around;
-
+}
+.uk-button.uk-button-default {
+    text-transform: none;
+    float: right;
+}
+.uk-button.uk-button-default:hover{
+    color: #114470 !important;
 }
 
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
