@@ -86,8 +86,8 @@ display: inline-flex !important;
     margin-bottom: 2em;
 }
 .col-lg-9 ul {
-    display: flex;
-    justify-content: space-around;
+    // display: flex;
+    // justify-content: space-around;
 }
 .uk-button.uk-button-default {
     text-transform: none;
@@ -95,6 +95,9 @@ display: inline-flex !important;
 }
 .uk-button.uk-button-default:hover{
     color: #114470 !important;
+}
+.col-lg-2{
+    width: 20%;
 }
 
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
