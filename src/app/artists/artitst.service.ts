@@ -1,12 +1,16 @@
-import { Album } from 'src/app/models/album.model';
 import { Artist } from "../models/artist.model";
-import { AlbumsService } from '../albums/albums.service';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { ArtistComponent } from "./artist/artist.component";
 
 @Injectable()
 export class ArtistsService {
 
-    artists: Artist[] = [
+    API_URL = 'https://music-diploma.azurewebsites.net/';
+
+    artists: Artist[] = []; 
+    /*
         new Artist(1, 'Eminem', 'Mashal', 'Matters', new Date('09-15-1987'), null, new Date('09-15-1997'), null, 'USA', 
         'Male', 'kinda complex', 'https://img2.thejournal.ie/inline/4378295/original/?width=500&version=4378295', null),
         new Artist(2, 'NF', 'Nathan', 'John Feuerstein', new Date('09-15-1956'), null, new Date('09-15-1997'), null, 'USA', 
@@ -19,15 +23,39 @@ export class ArtistsService {
         'Male', 'bio', 'http://www.femalefirst.co.uk/image-library/square/500/r/ryan-gosling---wi13-01----resize.jpg', null),
         new Artist(6, 'Marshmello', 'Chris', 'Comstock', new Date('09-15-1986'), null, new Date('09-15-1997'), null, 'Great Britain', 
         'Female', 'placeholder', 'https://images-na.ssl-images-amazon.com/images/I/61tuj9GDbjL.png', null)
-    ];
+    ];*/
 
-    getArtists(): Artist[] 
+    constructor(private httpClient: HttpClient) { }
+
+    getArtists(params?: HttpParams): Artist[] 
     {
-        return this.artists.slice();        
+        this.artists = [];
+
+        this.getArtistsApi(params).subscribe(value => {
+            value.body.forEach(element => {
+                this.artists.push({... element });
+                });
+            },
+            error => {
+                console.log('Ooops: ' + error);
+            });
+            
+        return this.artists;
+    }
+
+    private getArtistsApi(params?: HttpParams): Observable<HttpResponse<Artist[]>>
+    {
+        return this.httpClient.get<Artist[]>(`${this.API_URL}artists`, { observe: 'response', params });
     }
 
     getArtistsById(id: number): Artist 
     {
+        if (this.artists.length === 0)
+        {
+            const params = new HttpParams().set('pagesize', Number.MAX_VALUE.toString());
+            this.getArtists(params);
+        }
+
         return this.artists.filter(x => x.id === id)[0];        
     }
 }

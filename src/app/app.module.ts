@@ -12,6 +12,7 @@ import { AlbumComponent } from './albums/album/album.component';
 import { TrackComponent } from './albums/album/track/track.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistComponent } from './artists/artist/artist.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ArtistComponent } from './artists/artist/artist.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [AlbumsService, TracksService, ArtistsService],
   bootstrap: [AppComponent]

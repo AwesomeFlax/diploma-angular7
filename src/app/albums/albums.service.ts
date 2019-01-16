@@ -3,16 +3,21 @@ import { ArtistsService } from './../artists/artitst.service';
 import { Album } from './../models/album.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Track } from '../models/track.model';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class AlbumsService 
 {
+    API_URL = 'https://music-diploma.azurewebsites.net/';
+
     eminem: Artist = this.artistsService.getArtistsById(1);
     NF: Artist = this.artistsService.getArtistsById(2);
     adele: Artist = this.artistsService.getArtistsById(3);
 
     selectedAlbum = new EventEmitter<Album>();
-    albums: Album[] = [
+    albums: Album[] = []; 
+    /*= [
         new Album(0, "Mansion", "Hip-Hop", "2014-9-15", "desc0", "https://ecsmedia.pl/c/mansion-w-iext46383085.jpg", 
         [ new Track (1, 'Outcast'), new Track (2, 'Destiny')], this.NF),
         new Album(1, "Perception", "Hip-Hop", "2015-9-15", "desc1", "https://i2.cdn.hhv.de/catalog/475x475/00565/565327.jpg", 
@@ -25,13 +30,30 @@ export class AlbumsService
         [ new Track (9, 'Hello'), new Track (10, 'Send My Love') ], this.adele),
         new Album(5, "21", "Soul", "2019-9-15", "desc5", "https://images.store.hmv.com/app_/responsive/HMVStore/media/product/763088/01-763088.jpg?w=500",
         [ new Track (11, 'Rolling In The Deep'), new Track (12, 'Set Fire To The Rain') ], this.adele)
-    ]
+    ]*/
 
-    constructor(private artistsService: ArtistsService) {}
+    constructor(private artistsService: ArtistsService,
+                private httpClient: HttpClient) {}
     
     getAlbums(): Album[]
     {
-        return this.albums.slice();
+        this.albums = [];
+
+        this.getAlbumsApi().subscribe(value => {
+            value.body.forEach(element => {
+                this.albums.push({... element });
+                });
+            },
+            error => {
+                console.log('Ooops: ' + error);
+            });
+            
+        return this.albums;
+    }
+
+    private getAlbumsApi(): Observable<HttpResponse<Album[]>>
+    {
+        return this.httpClient.get<Album[]>(`${this.API_URL}albums`, { observe: 'response' });
     }
 
     addNewAlbum(newAlbum: Album)
@@ -41,11 +63,21 @@ export class AlbumsService
 
     getAlbumById(id: number): Album
     {
+        if (this.albums.length === 0)
+        {
+            this.getAlbums();
+        }
+
         return this.albums.filter(x => x.id == id)[0];
     }
 
     getAlbumsByArtist(id: number): Album[]
     {
+        if (this.albums.length === 0)
+        {
+            this.getAlbums();
+        }
+
         return this.albums.filter(x => x.artist.id === id);
     }
 }

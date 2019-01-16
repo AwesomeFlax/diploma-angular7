@@ -11,9 +11,11 @@ import { TouchSequence } from 'selenium-webdriver';
 export class ArtistsComponent implements OnInit {
 
     artistList: Artist[]
+
     constructor(private artistsService: ArtistsService) { }
 
-    ngOnInit() {
+    ngOnInit() 
+    {
         this.artistList = this.artistsService.getArtists();
     }
 
