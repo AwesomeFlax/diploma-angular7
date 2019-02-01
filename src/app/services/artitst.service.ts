@@ -2,8 +2,6 @@ import { environment } from 'src/environments/environment';
 import { Artist } from "../models/artist.model";
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { ArtistComponent } from "../artists/artist/artist.component";
 
 @Injectable()
 export class ArtistsService {

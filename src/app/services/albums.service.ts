@@ -1,11 +1,11 @@
 import { Artist } from '../models/artist.model';
-import { ArtistsService } from './artitst.service';
 import { Album } from '../models/album.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Track } from '../models/track.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { ArtistsService } from './artitst.service';
 
 @Injectable()
 export class AlbumsService {
