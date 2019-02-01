@@ -4,10 +4,11 @@ import { AlbumsComponent } from './albums/albums.component';
 import { AlbumComponent } from './albums/album/album.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistComponent } from './artists/artist/artist.component';
+import { ResolveAlbumService } from './resolve-services/ResolveAlbumService';
 
 const routes: Routes = [
     { path: 'albums', component: AlbumsComponent},
-    { path: 'album/:id', component: AlbumComponent},
+    { path: 'album/:id', component: AlbumComponent, resolve: { album: ResolveAlbumService }},
     { path: 'artists', component: ArtistsComponent},
     { path: 'artist/:id', component: ArtistComponent}
 ];

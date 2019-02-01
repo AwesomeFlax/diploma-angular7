@@ -1,60 +1,54 @@
-<html lang="en">
+<mat-progress-bar 
+    *ngIf="loading"
+    mode="indeterminate"
+>
+</mat-progress-bar>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12"> 
-                <div class="sidebar">
-                    <ul class="sidebar-nav">
-                        <li>
-                            <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" ></i></a>
-                        </li>
-                        <li>
-                            <a href="#">Home <i class="fa fa-home menu-icon fa-2x" ></i></a>
-                        </li>
-                        <li>
-                            <a href="#">Download<i class="fa fa-download menu-icon fa-2x" ></i></a>
-                        </li>
-                        <li>
-                            <a href="#">Edit<i class="fa fa-cog menu-icon fa-2x" ></i></a>
-                        </li>
-                        <li>
-                            <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" ></i>
-                                </a>
-                        </li>
-                    </ul>
-                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12"> 
+            <div class="sidebar">
+                <ul class="sidebar-nav">
+                    <li>
+                        <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" ></i></a>
+                    </li>
+                    <li>
+                        <a href="#">Home <i class="fa fa-home menu-icon fa-2x" ></i></a>
+                    </li>
+                    <li>
+                        <a href="#">Download<i class="fa fa-download menu-icon fa-2x" ></i></a>
+                    </li>
+                    <li>
+                        <a href="#">Edit<i class="fa fa-cog menu-icon fa-2x" ></i></a>
+                    </li>
+                    <li>
+                        <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" ></i>
+                            </a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link active"[routerLink]="['/artists']">Artists</a>
-                            <a class="nav-item nav-link" [routerLink]="['/albums']">Albums</a>
-                        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active"[routerLink]="['/artists']">Artists</a>
+                        <a class="nav-item nav-link" [routerLink]="['/albums']">Albums</a>
                     </div>
-                </nav>
-            </div>
-            <div class="container fluid">
-                <div class="row">
-                    <div class="col-lg-2">
-                    </div>
-                    <div class="col-lg-9">
-                        <router-outlet></router-outlet>
+                </div>
+            </nav>
+        </div>
+        <div class="container fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-9">
+                    <router-outlet></router-outlet>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>

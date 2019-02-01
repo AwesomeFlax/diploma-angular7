@@ -19,7 +19,9 @@
             <div class="form-control">
                 <div class="row">
                         <div class="row">
-                                <h3 class="my-auto">{{ album.name }}</h3>
+                                <h3 class="my-auto">
+                                    {{ album.name }}
+                                </h3>
                                 <a class="uk-button uk-button-default" href="">Add</a>
                             </div>
                     <div class="col-md-5">
@@ -38,7 +40,7 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="information-tab" href="#information" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
-                                    <iframe 
+                                    <iframe
                                         [src]="youtubeLink" width="620" height="340" frameborder="0" 
                                         allowfullscreen  uk-responsive  uk-video="automute: false">
                                     </iframe>

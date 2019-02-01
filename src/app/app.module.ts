@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AlbumsService } from './albums/albums.service';
-import { TracksService } from './albums/album/track/tracks.service';
-import { ArtistsService } from './artists/artitst.service';
+import { AlbumsService } from './services/albums.service';
+import { TracksService } from './services/tracks.service';
+import { ArtistsService } from './services/artitst.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,8 @@ import { TrackComponent } from './albums/album/track/track.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistComponent } from './artists/artist/artist.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule
   ],
   providers: [AlbumsService, TracksService, ArtistsService],
   bootstrap: [AppComponent]

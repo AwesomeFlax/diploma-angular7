@@ -1,6 +1,10 @@
-body {
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #fff;
 }
+
 .sidebar {
     color: #FFF;
     background: #114470;
@@ -84,10 +88,6 @@ display: inline-flex !important;
 }
 .uk-animation-toggle {
     margin-bottom: 2em;
-}
-.col-lg-9 ul {
-    // display: flex;
-    // justify-content: space-around;
 }
 .uk-button.uk-button-default {
     text-transform: none;

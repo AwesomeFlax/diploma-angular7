@@ -1,9 +1,10 @@
+import { Subscription } from 'rxjs';
 import { Album } from 'src/app/models/album.model';
-import { ArtistsService } from './../artitst.service';
+import { ArtistsService } from '../../services/artitst.service';
 import { Component, OnInit } from '@angular/core';
 import { Artist } from 'src/app/models/artist.model';
 import { ActivatedRoute } from '@angular/router';
-import { AlbumsService } from 'src/app/albums/albums.service';
+import { AlbumsService } from 'src/app/services/albums.service';
 
 @Component({
     selector: 'app-artist',
@@ -14,6 +15,7 @@ export class ArtistComponent implements OnInit {
 
     artist: Artist;
     albums: Album[];
+    subscription: Subscription;
 
     constructor(private artistsService: ArtistsService, 
                 private albumsService: AlbumsService,
@@ -21,7 +23,15 @@ export class ArtistComponent implements OnInit {
 
     ngOnInit() {
         const id: number = +this.activatedRoute.snapshot.params['id'];
-        this.artist = this.artistsService.getArtistsById(id);
-        this.albums = this.albumsService.getAlbumsByArtist(id);
+        
+        this.subscription = this.artistsService.getArtistById(id)
+            .subscribe(
+                (artist: Artist) => {
+                    this.artist = artist;
+                },
+                (error: Error) => {
+                    console.log(error.message);
+                }
+            );
     }
 }
