@@ -4,6 +4,7 @@ import { ArtistsService } from '../services/artist.service';
 import { TouchSequence } from 'selenium-webdriver';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Pager } from '../models/pager.model';
 
 @Component({
     selector: 'app-artists',
@@ -14,6 +15,7 @@ export class ArtistsComponent implements OnInit {
 
     artistList: Artist[];
     subscription: Subscription;
+    pager: Pager;
 
     constructor(private artistsService: ArtistsService,
                 private activatedRoute: ActivatedRoute) { }
@@ -21,5 +23,36 @@ export class ArtistsComponent implements OnInit {
     ngOnInit() 
     {
         this.artistList = this.activatedRoute.snapshot.data["artists"];
+        this.pager = this.artistsService.pagination;
+    }
+
+    onNextClick()
+    {
+        if (this.pager.CurrentPage < this.pager.TotalPages)
+        {
+            this.pager.CurrentPage += 1;
+            this.subscription = this.artistsService.getArtists().subscribe(
+                (data: Artist[]) => 
+                {
+                    this.artistList = data;
+                },
+                error => console.error(error)
+            );           
+        }
+    }
+
+    onPrevClick()
+    {
+        if (this.pager.CurrentPage != 1)
+        {
+            this.pager.CurrentPage -= 1;
+            this.subscription = this.artistsService.getArtists().subscribe(
+                (data: Artist[]) => 
+                {
+                    this.artistList = data;
+                },
+                error => console.error(error)
+            );
+        }
     }
 }

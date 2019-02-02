@@ -1,5 +1,5 @@
 import { AlbumsService } from 'src/app/services/albums.service';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Album } from 'src/app/models/album.model';
 import { Observable } from 'rxjs';
@@ -8,12 +8,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class AlbumsResolveService implements Resolve<Album[]> {
+
     constructor(private albumsService: AlbumsService) { }
 
-    resolve(
-            route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot
-        ): Observable<Album[]>|Promise<Album[]>|Album[] {
+    resolve(route: ActivatedRouteSnapshot,
+            state: RouterStateSnapshot): Observable<Album[]>|Promise<Album[]>|Album[] {
         return this.albumsService.getAlbums();
     }
 }

@@ -10,10 +10,8 @@ import { Observable } from 'rxjs';
 export class ArtistsResolveService implements Resolve<Artist[]> {
     constructor(private artistsService: ArtistsService) { }
 
-    resolve(
-            route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot
-        ): Observable<Artist[]>|Promise<Artist[]>|Artist[] {
+    resolve(route: ActivatedRouteSnapshot,
+            state: RouterStateSnapshot): Observable<Artist[]>|Promise<Artist[]>|Artist[] {
         return this.artistsService.getArtists();
     }
 }

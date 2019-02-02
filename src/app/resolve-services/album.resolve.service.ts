@@ -8,12 +8,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class AlbumResolveService implements Resolve<Album> {
+    
     constructor(private albumsService: AlbumsService) { }
 
-    resolve(
-            route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot
-        ): Observable<Album>|Promise<Album>|Album {
+    resolve(route: ActivatedRouteSnapshot,
+            state: RouterStateSnapshot): Observable<Album>|Promise<Album>|Album {
         return this.albumsService.getAlbumsById(route.params["id"]);
     }
 }

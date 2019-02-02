@@ -1,23 +1,39 @@
-import { Artist } from '../models/artist.model';
 import { Album } from '../models/album.model';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Track } from '../models/track.model';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient, HttpParams  } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ArtistsService } from './artist.service';
+import { Pager } from '../models/pager.model';
 
 @Injectable()
 export class AlbumsService {
+    
     selectedAlbum = new EventEmitter<Album>();
-    albums: Album[] = []; 
+    albums: Album[] = [];
+    pagination: Pager;
 
-    constructor(private artistsService: ArtistsService,
-                private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {}
     
     getAlbums()
     {
-        return this.httpClient.get<Album[]>(`${environment.API_URL}/albums`);
+        let pager = new HttpParams();
+        
+        if (this.pagination != undefined)
+        {
+            pager.set('pagenumber', this.pagination.CurrentPage.toString());
+        }
+        else
+        {
+            this.httpClient.get<Album[]>(`${environment.API_URL}albums`, { observe: 'response' } )
+            .subscribe(resp => 
+                {
+                    this.pagination = JSON.parse(resp.headers.get('Paging-Headers'));
+                });
+            
+            pager.set('pagenumber', '1');
+        }
+
+        return this.httpClient.get<Album[]>(`${environment.API_URL}albums?pagenumber=${this.pagination.CurrentPage}`, );
     }
 
     getAlbumsByArtist(artistId: number)
