@@ -1,8 +1,9 @@
 import { Artist } from './../models/artist.model';
 import { Component, OnInit } from '@angular/core';
-import { ArtistsService } from '../services/artitst.service';
+import { ArtistsService } from '../services/artist.service';
 import { TouchSequence } from 'selenium-webdriver';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-artists',
@@ -14,16 +15,11 @@ export class ArtistsComponent implements OnInit {
     artistList: Artist[];
     subscription: Subscription;
 
-    constructor(private artistsService: ArtistsService) { }
+    constructor(private artistsService: ArtistsService,
+                private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() 
     {
-        this.subscription = this.artistsService.getArtists()
-            .subscribe(
-                (artist: Artist[]) => this.artistList = artist,
-                (error: Error) => {
-                    console.log(error.message);
-                }
-            );
+        this.artistList = this.activatedRoute.snapshot.data["artists"];
     }
 }

@@ -1,7 +1,7 @@
 import { AlbumsService } from '../services/albums.service';
 import { Album } from './../models/album.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TracksService } from '../services/tracks.service';
 import { Subscription } from 'rxjs';
 
@@ -18,17 +18,12 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     constructor(
         private albumsService: AlbumsService,
         private trackService: TracksService, 
+        private activatedRoute: ActivatedRoute,
         private router: Router
         ) { }
 
     ngOnInit() {
-        this.subscription = this.albumsService.getAlbums()
-            .subscribe(
-                (albums: Album[]) => this.albumsList = albums,
-                (error: Error) => {
-                    console.log(error.message);
-                }
-            );
+        this.albumsList = this.activatedRoute.snapshot.data["albums"];
     }
 
     onAlbumSelect(album: Album) {

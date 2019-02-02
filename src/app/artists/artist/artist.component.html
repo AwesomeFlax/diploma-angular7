@@ -1,9 +1,9 @@
 <div class="row">
-        <div class="col-lg-5">
-                <P>
-                    <img data-src="{{ artist.artistPhoto }}" width="" height="" alt="" uk-img>
-                </P>
-                </div>
+    <div class="col-lg-5">
+        <P>
+            <img data-src="{{ artist.artistPhoto }}" width="" height="" alt="" uk-img>
+        </P>
+    </div>
 <div class="col-lg-7 artistRow">
     <h3>
         {{ artist.nickName }}
@@ -20,28 +20,26 @@
 </div>
 <div class="row">
     <div class="col-lg-6"></div> 
-<div class="col-lg-6">
+    <div class="col-lg-6">
         <div class="d-flex justify-content-center">
-      <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">
-        <ul class="uk-slider-items uk-grid">
-            <li 
-                class="uk-width-3-4"
-                *ngFor="let album of albums"
-                class="uk-text-center"
-                routerLink='/album/{{ album.id }}' routerLinkActive="router-link-active" 
-            >
-                <div class="uk-panel">
-                    <img src="{{ album.albumCover }}" width="250px" height="250px" alt="">
-                    <div class="uk-position-center uk-panel"><h4> {{ album.name }} </h4></div>
-                </div>
-            </li>
-        </ul>
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">
+                <ul class="uk-slider-items uk-grid">
+                    <li 
+                        class="uk-width-3-4"
+                        *ngFor="let album of albums"
+                        class="uk-text-center"
+                        routerLink='/album/{{ album.id }}' routerLinkActive="router-link-active" 
+                    >
+                        <div class="uk-panel">
+                            <img src="{{ album.albumCover }}" width="250px" height="250px" alt="">
+                            <div class="uk-position-center uk-panel"><h4> {{ album.name }} </h4></div>
+                        </div>
+                    </li>
+                </ul>
 
-        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div> 
-
-

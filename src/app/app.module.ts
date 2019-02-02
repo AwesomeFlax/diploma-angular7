@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AlbumsService } from './services/albums.service';
 import { TracksService } from './services/tracks.service';
-import { ArtistsService } from './services/artitst.service';
+import { ArtistsService } from './services/artist.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

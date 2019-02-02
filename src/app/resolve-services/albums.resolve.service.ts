@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class ResolveAlbumService implements Resolve<Album> {
+export class AlbumsResolveService implements Resolve<Album[]> {
     constructor(private albumsService: AlbumsService) { }
 
     resolve(
             route: ActivatedRouteSnapshot,
             state: RouterStateSnapshot
-        ): Observable<Album>|Promise<Album>|Album {
-        return this.albumsService.getAlbumsById(route.params["id"]);
+        ): Observable<Album[]>|Promise<Album[]>|Album[] {
+        return this.albumsService.getAlbums();
     }
 }

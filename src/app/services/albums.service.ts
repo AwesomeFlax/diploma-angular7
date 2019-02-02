@@ -5,7 +5,7 @@ import { Track } from '../models/track.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { ArtistsService } from './artitst.service';
+import { ArtistsService } from './artist.service';
 
 @Injectable()
 export class AlbumsService {
