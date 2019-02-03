@@ -21,7 +21,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(
-        private albumsService: AlbumsService, 
         private tracksService: TracksService, 
         private activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer,
@@ -41,12 +40,18 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     makeYoutubeLink() {
-        console.log('makeYoutubeLink');
         const linkBegining = 'https://www.youtube-nocookie.com/embed/';
         const linkEnd = '?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1';
 
-        this.youtubeLink = this.sanitizer.bypassSecurityTrustResourceUrl(
-            linkBegining + this.tracksService.getYoutubeLink(this.selectedTrack.id) + linkEnd);
+        let youtubeVideoId: string;
+
+        this.tracksService.getYoutubeLink(this.selectedTrack.id)
+            .subscribe((resp: string) =>
+            {
+                youtubeVideoId = resp;
+                this.youtubeLink = this.sanitizer.bypassSecurityTrustResourceUrl(
+                    linkBegining + youtubeVideoId.substr(16) + linkEnd);
+            });
     }
 
     ngOnDestroy(): void {

@@ -3,16 +3,19 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Album } from 'src/app/models/album.model';
 import { Observable } from 'rxjs';
+import { TracksService } from '../services/tracks.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AlbumResolveService implements Resolve<Album> {
-    
-    constructor(private albumsService: AlbumsService) { }
+export class AlbumResolveService implements Resolve<Album> 
+{    
+    constructor(private albumsService: AlbumsService,
+                private trackService: TracksService) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<Album>|Promise<Album>|Album {
-        return this.albumsService.getAlbumsById(route.params["id"]);
-    }
+            state: RouterStateSnapshot): Observable<Album>|Promise<Album>|Album 
+        {
+            return this.albumsService.getAlbumsById(route.params["id"]);
+        }
 }

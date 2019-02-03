@@ -41,6 +41,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="information-tab" href="#information" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
                                     <iframe
+                                        *ngIf="youtubeLink != null"
                                         [src]="youtubeLink" width="620" height="340" frameborder="0" 
                                         allowfullscreen  uk-responsive  uk-video="automute: false">
                                     </iframe>

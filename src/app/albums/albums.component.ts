@@ -25,8 +25,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
         ) { }
     
     ngOnInit() {
-        this.albumsList = this.activatedRoute.snapshot.data["albums"];
         this.pager = this.albumsService.pagination;
+        this.albumsList = this.activatedRoute.snapshot.data["albums"];
     }
 
     onAlbumSelect(album: Album) {
@@ -42,9 +42,9 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
     onNextClick()
     {
-        if (this.pager.CurrentPage < this.pager.TotalPages)
+        if (this.pager.TotalPages > this.pager.CurrentPage)
         {
-            this.pager.CurrentPage += 1;
+                this.pager.CurrentPage += 1;
             this.subscription = this.albumsService.getAlbums().subscribe(
                 (data: Album[]) => 
                 {
@@ -57,7 +57,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
     onPrevClick()
     {
-        if (this.pager.CurrentPage != 1)
+        if (this.pager.CurrentPage > 1)
         {
             this.pager.CurrentPage -= 1;
             this.subscription = this.albumsService.getAlbums().subscribe(

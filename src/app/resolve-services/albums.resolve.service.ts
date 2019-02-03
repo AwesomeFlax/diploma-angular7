@@ -12,7 +12,14 @@ export class AlbumsResolveService implements Resolve<Album[]> {
     constructor(private albumsService: AlbumsService) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<Album[]>|Promise<Album[]>|Album[] {
-        return this.albumsService.getAlbums();
-    }
+            state: RouterStateSnapshot): Observable<Album[]>|Promise<Album[]>|Album[] 
+        {
+            this.albumsService.setUpPager()
+            .subscribe(resp => 
+                {
+                    this.albumsService.pagination = JSON.parse(resp.headers.get('Paging-Headers'));
+                });
+
+            return this.albumsService.getAlbums();
+        }
 }

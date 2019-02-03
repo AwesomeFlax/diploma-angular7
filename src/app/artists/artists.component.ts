@@ -22,13 +22,14 @@ export class ArtistsComponent implements OnInit {
 
     ngOnInit() 
     {
-        this.artistList = this.activatedRoute.snapshot.data["artists"];
         this.pager = this.artistsService.pagination;
+        this.artistList = this.activatedRoute.snapshot.data["artists"];
     }
 
     onNextClick()
     {
-        if (this.pager.CurrentPage < this.pager.TotalPages)
+        if (this.pager.TotalPages > this.pager.CurrentPage)
+
         {
             this.pager.CurrentPage += 1;
             this.subscription = this.artistsService.getArtists().subscribe(
@@ -43,7 +44,7 @@ export class ArtistsComponent implements OnInit {
 
     onPrevClick()
     {
-        if (this.pager.CurrentPage != 1)
+        if (this.pager.CurrentPage > 1)
         {
             this.pager.CurrentPage -= 1;
             this.subscription = this.artistsService.getArtists().subscribe(

@@ -11,7 +11,14 @@ export class ArtistsResolveService implements Resolve<Artist[]> {
     constructor(private artistsService: ArtistsService) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<Artist[]>|Promise<Artist[]>|Artist[] {
-        return this.artistsService.getArtists();
-    }
+            state: RouterStateSnapshot): Observable<Artist[]>|Promise<Artist[]>|Artist[] 
+        {
+            this.artistsService.setUpPager()
+            .subscribe(resp => 
+                {
+                    this.artistsService.pagination = JSON.parse(resp.headers.get('Paging-Headers'));
+                });
+
+            return this.artistsService.getArtists();
+        }
 }

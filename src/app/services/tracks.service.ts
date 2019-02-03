@@ -1,8 +1,13 @@
 import { Track } from 'src/app/models/track.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
+@Injectable()
 export class TracksService {
 
+    constructor(private httpClient: HttpClient) {}
+    
     selectedTrack = new EventEmitter<Track>();
     selectedAlbumTracks: Track[];
 
@@ -16,8 +21,8 @@ export class TracksService {
         this.selectedAlbumTracks = tracks;
     }
 
-    getYoutubeLink(id: number): string
+    getYoutubeLink(id: number)
     {
-        return 'https://youtu.be/8ACMtDdtH8U'.substr(17);
+        return this.httpClient.get(`${environment.API_URL}songs/${id}/youtube`);
     }
 }
