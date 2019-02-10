@@ -1,3 +1,4 @@
+import { Pager } from './models/pager.model';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlbumsComponent } from './albums/albums.component';

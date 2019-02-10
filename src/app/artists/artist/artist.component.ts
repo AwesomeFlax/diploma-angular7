@@ -17,6 +17,11 @@ export class ArtistComponent implements OnInit {
     albums: Album[];
     subscription: Subscription;
 
+    birthDate: string;
+    deathDate: string;
+    careerBeginDate: string;
+    careerEndDate: string;
+
     constructor(private artistsService: ArtistsService, 
                 private albumsService: AlbumsService,
                 private activatedRoute: ActivatedRoute) 
@@ -24,6 +29,23 @@ export class ArtistComponent implements OnInit {
 
     ngOnInit() {
         this.artist = this.activatedRoute.snapshot.data["artist"];        
-        this.albums = this.artist.albums;       
+        this.albums = this.artist.albums;
+
+        this.birthDate = new Date(this.artist.birthDate).toLocaleDateString();
+        
+        if (this.artist.deathDate != null)
+            this.deathDate = `— ${new Date(this.artist.deathDate).toLocaleDateString()}`;
+        else
+            this.deathDate = "";
+        
+        if (this.artist.careerEnd != null)
+            this.careerEndDate = `— ${new Date(this.artist.careerEnd).getFullYear().toString()}`;
+        else
+            this.careerEndDate = "— Nowadays";
+
+        if (this.artist.careerStart != null)
+            this.careerBeginDate = new Date(this.artist.careerStart).getFullYear().toString();
+        else
+            this.careerBeginDate = "Unknown";
     }
 }

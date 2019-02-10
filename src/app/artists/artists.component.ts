@@ -1,3 +1,4 @@
+import { Artists } from './../models/artists.model';
 import { Artist } from './../models/artist.model';
 import { Component, OnInit } from '@angular/core';
 import { ArtistsService } from '../services/artist.service';
@@ -22,20 +23,20 @@ export class ArtistsComponent implements OnInit {
 
     ngOnInit() 
     {
-        this.pager = this.artistsService.pagination;
-        this.artistList = this.activatedRoute.snapshot.data["artists"];
+        let response: Artists = this.activatedRoute.snapshot.data["artists"];
+        this.pager = new Pager(response.pageNumber, response.pageSize, response.totalNumberOfPages, response.totalNumberOfRecords);
+        this.artistList = response.results;
     }
 
     onNextClick()
     {
-        if (this.pager.TotalPages > this.pager.CurrentPage)
-
+        if (this.pager.pageNumber < this.pager.totalNumberOfPages)
         {
-            this.pager.CurrentPage += 1;
-            this.subscription = this.artistsService.getArtists().subscribe(
-                (data: Artist[]) => 
+            this.subscription = this.artistsService.getArtists(this.pager.pageNumber += 1).subscribe(
+                (data: Artists) => 
                 {
-                    this.artistList = data;
+                    this.artistList = data.results;
+                    this.pager = new Pager(data.pageNumber, data.pageSize, data.totalNumberOfPages, data.totalNumberOfRecords);
                 },
                 error => console.error(error)
             );           
@@ -44,13 +45,14 @@ export class ArtistsComponent implements OnInit {
 
     onPrevClick()
     {
-        if (this.pager.CurrentPage > 1)
+        if (this.pager.pageNumber > 1)
         {
-            this.pager.CurrentPage -= 1;
-            this.subscription = this.artistsService.getArtists().subscribe(
-                (data: Artist[]) => 
+            this.subscription = this.artistsService.getArtists(this.pager.pageNumber -= 1).subscribe(
+                (data: Artists) => 
                 {
-                    this.artistList = data;
+                    this.artistList = data.results;
+                    this.pager = new Pager(data.pageNumber, data.pageSize, data.totalNumberOfPages, data.totalNumberOfRecords);
+
                 },
                 error => console.error(error)
             );

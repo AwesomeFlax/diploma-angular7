@@ -50,7 +50,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
             {
                 youtubeVideoId = resp;
                 this.youtubeLink = this.sanitizer.bypassSecurityTrustResourceUrl(
-                    linkBegining + youtubeVideoId.substr(16) + linkEnd);
+                    linkBegining + youtubeVideoId + linkEnd);
             });
     }
 

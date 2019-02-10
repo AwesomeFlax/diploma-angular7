@@ -29,22 +29,23 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <br> 
+    <div class="row" >
         <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link active"[routerLink]="['/artists']">Artists</a>
-                        <a class="nav-item nav-link" [routerLink]="['/albums']">Albums</a>
-                    </div>
+                    <ul class="uk-subnav uk-subnav-divider" uk-margin>
+                        <li class="uk-active"><a href="" [routerLink]="['/artists']">Artists</a></li>
+                        <li class="uk-active"><a href="" [routerLink]="['/albums']">Albums</a></li>
+                    </ul>
                 </div>
             </nav>
         </div>
         <div class="container fluid">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     <router-outlet></router-outlet>
 
                 </div>

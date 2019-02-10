@@ -3,22 +3,17 @@ import { ArtistsService } from '../services/artist.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Artists } from '../models/artists.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ArtistsResolveService implements Resolve<Artist[]> {
+export class ArtistsResolveService implements Resolve<Artists> {
     constructor(private artistsService: ArtistsService) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<Artist[]>|Promise<Artist[]>|Artist[] 
+            state: RouterStateSnapshot): Observable<Artists>|Promise<Artists>|Artists 
         {
-            this.artistsService.setUpPager()
-            .subscribe(resp => 
-                {
-                    this.artistsService.pagination = JSON.parse(resp.headers.get('Paging-Headers'));
-                });
-
             return this.artistsService.getArtists();
         }
 }

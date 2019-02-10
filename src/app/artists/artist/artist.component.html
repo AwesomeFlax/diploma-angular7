@@ -1,23 +1,29 @@
 <div class="row">
     <div class="col-lg-5">
-        <P>
-            <img data-src="{{ artist.artistPhoto }}" width="" height="" alt="" uk-img>
-        </P>
+        <img class="uk-border-circle uk-position-left" data-src="{{ artist.artistPhoto }}" width="400px" height="400px" alt="" uk-img>
     </div>
-<div class="col-lg-7 artistRow">
-    <h3>
-        {{ artist.nickName }}
-    </h3>
-    <P>
-        {{ artist.firstName + ' ' + artist.lastName }}
-    </P>
-    <P>
-        BirtDate: {{ artist.birthDate.toDateString() + '--' + artist.deathDate }}
-    </P>
-    <P>
-        Career: {{ artist.careerStart.toDateString() + '--' + artist.careerEnd }}
-    </P>
+    <div class="col-lg-7">
+        <article class="uk-article">
+            <h1 class="uk-article-title uk-text-uppercase">
+                {{ artist.nickName }}
+            </h1>
+            <dl class="uk-description-list uk-description-list-divider">
+                <dt>{{ artist.firstName + ' ' + artist.lastName }} </dt>
+                <dt><span class="uk-text-bold">Birth date</span></dt>
+                <dd>{{ birthDate }} {{ deathDate }}</dd>
+                <dt><span class="uk-text-bold">Birth place</span></dt>
+                <dd>{{ artist.birthPlace }}</dd>
+                <dt><span class="uk-text-bold">Career</span></dt>
+                <dd>{{ careerBeginDate }} {{ careerEndDate }}</dd>
+                <dt><span class="uk-text-bold">Biography</span></dt>
+                <dd>{{ artist.biography }}</dd>
+            </dl>
+        </article>
+    </div>
 </div>
+<br> 
+<br> 
+<hr class="uk-divider-icon">
 <div class="row">
     <div class="col-lg-6"></div> 
     <div class="col-lg-6">
@@ -32,6 +38,7 @@
                     >
                         <div class="uk-panel">
                             <img src="{{ album.albumCover }}" width="250px" height="250px" alt="">
+
                             <div class="uk-position-center uk-panel"><h4> {{ album.name }} </h4></div>
                         </div>
                     </li>
