@@ -3,53 +3,52 @@
     mode="indeterminate"
 >
 </mat-progress-bar>
-
-<div class="container-fluid">
+<div class="col-lg-2">
     <div class="row">
-        <div class="col-lg-12"> 
-            <div class="sidebar">
-                <ul class="sidebar-nav">
-                    <li>
-                        <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" ></i></a>
+        <aside id="left-col" class="uk-light">
+            <div class="bar-wrap"> 
+                <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+                    <li class="uk-nav-header">Account</li>
+                        <li><a href="" [routerLink]="['/authorization']"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> Sign In</a></li>
+                        <li><a href="" [routerLink]="['/registration']"><span class="uk-margin-small-right" uk-icon="icon: arrow-right"></span> Sign Up</a></li>
+                    <br> <li class="uk-nav-divider"></li> <br>
+                    
+                    <li class="uk-nav-header">Dasboard</li>
+                        <li><a href="" [routerLink]="['/artists']"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Artists</a></li>
+                        <li><a href="" [routerLink]="['/albums']"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Albums</a></li>
+                    <br> <li class="uk-nav-divider"></li> <br>
+                    
+                    <li class="uk-nav-header">Library</li>
+                        <li><a href="" [routerLink]="['/artists']"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Favored Albums</a></li>
+                        <li><a href="" [routerLink]="['/albums']"><span class="uk-margin-small-right" uk-icon="icon: heart"></span> Follows</a></li>
+                    <br> <li class="uk-nav-divider"></li> <br>
+
+                    <li class="uk-parent">
+                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: user"></span> {{ userName }} </a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Log out</a></li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="#">Home <i class="fa fa-home menu-icon fa-2x" ></i></a>
-                    </li>
-                    <li>
-                        <a href="#">Download<i class="fa fa-download menu-icon fa-2x" ></i></a>
-                    </li>
-                    <li>
-                        <a href="#">Edit<i class="fa fa-cog menu-icon fa-2x" ></i></a>
-                    </li>
-                    <li>
-                        <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" ></i>
-                            </a>
-                    </li>
+                </ul> 
+            </div>
+        </aside>
+    </div>
+</div>
+<div class="col-lg-10">
+    <div class="row">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="" [routerLink]="['/artists']">Artists</a></li>
+                    <li class="uk-active"><a href="" [routerLink]="['/albums']">Albums</a></li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <br> 
-    <div class="row" >
-        <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg">
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <ul class="uk-subnav uk-subnav-divider" uk-margin>
-                        <li class="uk-active"><a href="" [routerLink]="['/artists']">Artists</a></li>
-                        <li class="uk-active"><a href="" [routerLink]="['/albums']">Albums</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <div class="container fluid">
-            <div class="row">
-                <div class="col-lg-3">
-                </div>
-                <div class="col-lg-7">
-                    <router-outlet></router-outlet>
-
-                </div>
-            </div>
+        </nav>
+        <br>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

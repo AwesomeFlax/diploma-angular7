@@ -1,4 +1,3 @@
-import { Pager } from './models/pager.model';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlbumsComponent } from './albums/albums.component';
@@ -9,12 +8,17 @@ import { AlbumResolveService } from './resolve-services/album.resolve.service';
 import { AlbumsResolveService } from './resolve-services/albums.resolve.service';
 import { ArtistResolveService } from './resolve-services/artist.resolve.service';
 import { ArtistsResolveService } from './resolve-services/artists.resolve.service';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { AuthorizationComponent } from './user/authorization/authorization.component';
 
 const routes: Routes = [
     { path: 'albums', component: AlbumsComponent, resolve: { albums: AlbumsResolveService } },
     { path: 'album/:id', component: AlbumComponent, resolve: { album: AlbumResolveService } },
     { path: 'artists', component: ArtistsComponent, resolve: { artists: ArtistsResolveService } },
-    { path: 'artist/:id', component: ArtistComponent, resolve: { artist: ArtistResolveService } }
+    { path: 'artist/:id', component: ArtistComponent, resolve: { artist: ArtistResolveService } },
+    { path: 'registration', component: RegistrationComponent },
+    { path: 'authorization', component: AuthorizationComponent }
+
 ];
 
 @NgModule({

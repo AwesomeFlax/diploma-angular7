@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Pager } from '../models/pager.model';
 import { Artists } from '../models/artists.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ArtistsService {
 
     //artists: Artist[] = []; 

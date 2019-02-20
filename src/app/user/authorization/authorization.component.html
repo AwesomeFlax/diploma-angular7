@@ -1,0 +1,48 @@
+<form>
+    <div class="col-lg-2">
+    </div>
+
+    <div class="col-lg-8">
+        <fieldset class="uk-fieldset">
+            <legend class="uk-legend uk-align-center uk-text-uppercase">Login</legend>
+            
+            <div class="row uk-align-center">
+                <div class="uk-margin uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input 
+                        #login
+                        class="uk-input uk-form-width-large" 
+                        required 
+                        name="nickName" 
+                        id="nickName"
+                        ngDefaultControl 
+                        type="text" 
+                        placeholder="E-Mail"
+                    >
+                </div>
+                <div class="uk-margin uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input
+                        #pass
+                        class="uk-input uk-form-width-large" 
+                        required 
+                        name="password" 
+                        id="password" 
+                        ngDefaultControl 
+                        type="password" 
+                        placeholder="Password"
+                    >
+                </div>
+            </div>
+        </fieldset>
+    <div class="uk-margin">
+        <button 
+            class="uk-button uk-align-right uk-button-primary"
+            (click)="Authorize()"
+        >
+                Login
+            </button>
+            <button class="uk-button uk-button-default uk-align-right uk-text-uppercase">Back</button>
+        </div>
+    </div>
+</form>

@@ -4,11 +4,10 @@ import { HttpClient  } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Albums } from '../models/albums.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AlbumsService {
     
     selectedAlbum = new EventEmitter<Album>();
-    //albums: Album[] = [];
 
     constructor(private httpClient: HttpClient) {}
     

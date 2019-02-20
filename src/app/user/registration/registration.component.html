@@ -1,0 +1,148 @@
+<form>
+    <div class="col-lg-4">
+    </div>
+
+    <div class="col-lg-10">
+        <fieldset class="uk-fieldset">
+            <legend class="uk-legend uk-align-center uk-text-uppercase">Create new account</legend>
+            
+            <div class="row">
+                <div class="col-lg-6"> 
+                    <div class="uk-margin uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input 
+                        class="uk-input uk-form-width-large" 
+                        required 
+                        name="nickName" 
+                        id="nickName" 
+                        [(ngModel)]="user.nickName" 
+                        ngDefaultControl 
+                        type="text" 
+                        placeholder="Nickname"
+                    >
+                    </div>
+                        
+                    <div class="uk-margin uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                        <input 
+                        class="uk-input uk-form-width-large" 
+                        required="required"
+                        [(ngModel)]="user.email" 
+                        ngDefaultControl 
+                        id="email"
+                        name="email" 
+                        type="email" 
+                        placeholder="example@domain.com"
+                        >
+                    </div>
+                    
+                    <div class="uk-margin uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input 
+                        class="uk-input uk-form-width-large" 
+                            required="required" 
+                            [(ngModel)]="user.password" 
+                            ngDefaultControl 
+                            id="password" 
+                            name="password"
+                            type="password" 
+                            placeholder="At least 6 characters"
+                        >
+                    </div>
+                    
+                    <div class="uk-margin uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input 
+                        class="uk-input uk-form-width-large" 
+                        required="required" 
+                        [(ngModel)]="user.confirmPassword" 
+                        ngDefaultControl 
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        type="password" 
+                            placeholder="Repeat password"
+                            >
+                        </div>          
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="uk-margin uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: pencil"></span>
+                            <input 
+                            class="uk-input uk-form-width-large" 
+                            required="required" 
+                            [(ngModel)]="user.firstName" 
+                            ngDefaultControl 
+                            id="firstName"
+                            name="firstName"
+                            type="text" 
+                            placeholder="John"
+                            >
+                        </div>
+                        
+                        <div class="uk-margin uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: pencil"></span>
+                            <input 
+                            class="uk-input uk-form-width-large"
+                            required="required" 
+                            [(ngModel)]="user.lastName" 
+                            ngDefaultControl 
+                            id="lastName"
+                            name="lastName"
+                            type="text" 
+                            placeholder="Smith"
+                            >
+                        </div>
+                        
+                    <div class="uk-margin uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                        <input 
+                        class="uk-input uk-form-width-large" 
+                            required="required" 
+                            [(ngModel)]="user.birthDate" 
+                            ngDefaultControl  
+                            id="birthDate"
+                            name="birthDate"
+                            type="date" 
+                            placeholder="Bith date"
+                            >
+                    </div>
+                        
+                    <div class="uk-margin uk-inline">
+                        <select 
+                            class="uk-select uk-form-width-large uk-text-uppercase"
+                                [(ngModel)]="user.gender" 
+                                ngDefaultControl 
+                                id="gender"
+                                name="gender"
+                            >
+                            <option value="">Select please</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+                </div>
+        </div>
+    </fieldset>
+    <div class="uk-inline uk-margin">
+        <span class="uk-form-icon" uk-icon="icon: link"></span>
+        <input
+            class="uk-input" 
+            [(ngModel)]="user.userPhotoUrl" 
+            ngDefaultControl 
+            id="userPhotoUrl" 
+            type="text" 
+            placeholder="Provide please your photo Url"
+        >
+    </div>
+    
+    <div class="uk-margin">
+        <button 
+        class="uk-button uk-align-right uk-button-primary"
+                (click)="CreateNewAccount()"
+            >
+                Register
+            </button>
+            <button class="uk-button uk-button-default uk-align-right uk-text-uppercase">Back</button>
+        </div>
+    </div>
+</form>

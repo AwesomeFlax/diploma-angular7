@@ -93,12 +93,26 @@ display: inline-flex !important;
     text-transform: none;
     float: right;
 }
-.uk-button.uk-button-default:hover{
+.uk-button.uk-button-default:hover {
     color: #114470 !important;
 }
-.col-lg-2{
-    width: 20%;
-}
+#left-col {
+    position: fixed;
+    left: 0;
+    top:0;
+    bottom:0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #222;
+    width: 330px;
+    z-index:1;
+  }
+  .bar-wrap {
+    padding: 2rem;
+  }
+  #right-col {
+    margin-left: 330px;
+  }
 
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
 @import "../node_modules/uikit/src/scss/mixins-theme.scss";

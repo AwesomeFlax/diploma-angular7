@@ -12,8 +12,8 @@ import { Albums } from '../models/albums.model';
     templateUrl: './albums.component.html',
     styleUrls: ['./albums.component.css']
 })
-export class AlbumsComponent implements OnInit/*, OnDestroy*/ {
-
+export class AlbumsComponent implements OnInit 
+{
     albumsList: Album[];
     subscription: Subscription;
     pager: Pager;
