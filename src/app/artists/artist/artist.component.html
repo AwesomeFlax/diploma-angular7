@@ -30,7 +30,14 @@
 <br> 
 <hr class="uk-divider-icon">
 <div class="row">
-    <div class="col-lg-6"></div> 
+    <div class="col-lg-6">
+        <h3 class="uk-text-uppercase">Top tracks:</h3>
+        <app-track
+            *ngFor="let item of topTracks" 
+            [track]=item
+        >
+        </app-track>
+    </div> 
     <div class="col-lg-6">
         <div class="d-flex justify-content-center">
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">

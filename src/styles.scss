@@ -113,6 +113,10 @@ display: inline-flex !important;
   #right-col {
     margin-left: 330px;
   }
+  .pager-bottom {
+    position: absolute;
+    bottom: 0px;
+  }
 
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
 @import "../node_modules/uikit/src/scss/mixins-theme.scss";

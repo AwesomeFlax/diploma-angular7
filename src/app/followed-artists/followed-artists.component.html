@@ -1,0 +1,38 @@
+<div style="position: relative">
+    <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-grid-match uk-grid-large" uk-grid>
+        <div
+            *ngFor="let artist of artistList"
+            routerLink='/artist/{{ artist.id }}' routerLinkActive="router-link-active" 
+            class="uk-text-center"
+        >
+            <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                <img data-src="{{ artist.artistPhoto }}" width="230px" height="230px" alt="" uk-img>
+                <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+                    <p class="uk-h4 uk-margin-remove">{{ artist.nickName }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <ul class="uk-pagination uk-flex-center">
+        <li>
+            <a
+                (click)="onPrevClick()"
+                >
+                <span class="uk-margin-small-right" uk-pagination-previous></span> 
+                Previous
+            </a>
+        </li>
+    <li>
+        <p> {{ pager.pageNumber }} / {{ pager.totalNumberOfPages }} </p>
+    </li>
+    <li>
+        <a
+            (click)="onNextClick()"
+            >
+            Next 
+            <span class="uk-margin-small-left" uk-pagination-next></span>
+        </a>
+    </li>
+    </ul>
+</div>

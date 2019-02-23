@@ -4,6 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Pager } from '../models/pager.model';
 import { Artists } from '../models/artists.model';
+import { Track } from '../models/track.model';
 
 @Injectable({providedIn: 'root'})
 export class ArtistsService 
@@ -25,8 +26,8 @@ export class ArtistsService
         return this.httpClient.get<Artist>(`${environment.API_URL}artists/${id}`);
     }
 
-    setUpPager()
+    getTopTracks(id: number)
     {
-        return this.httpClient.get<Artist[]>(`${environment.API_URL}artists`, { observe: 'response' } );
+        return this.httpClient.get<Track[]>(`${environment.API_URL}artists/${id}/toptracks`);
     }
 }

@@ -1,5 +1,6 @@
+import { Track } from './../../models/track.model';
 import { EventEmitter } from '@angular/core';
-import { Follow } from './../../models/follows.model';
+import { Follow } from '../../models/follow.model';
 import { FollowsService } from './../../services/follows.service';
 import { Subscription } from 'rxjs';
 import { Album } from 'src/app/models/album.model';
@@ -7,6 +8,10 @@ import { ArtistsService } from '../../services/artist.service';
 import { Component, OnInit } from '@angular/core';
 import { Artist } from 'src/app/models/artist.model';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+import { CollectionsService } from 'src/app/services/collections.service';
+import { Collection } from 'src/app/models/collections.model';
+import { Follows } from 'src/app/models/follows.model';
 
 @Component({
     selector: 'app-artist',
@@ -16,8 +21,9 @@ import { ActivatedRoute } from '@angular/router';
 export class ArtistComponent implements OnInit {
 
     artist: Artist;
-    follows: Follow[];
+    follows: Follows;
     albums: Album[];
+    topTracks: Track[];
     subscription: Subscription;
 
     birthDate: string;
@@ -27,7 +33,10 @@ export class ArtistComponent implements OnInit {
     followAction = "Follow";
 
     constructor(private followsService: FollowsService, 
-                private activatedRoute: ActivatedRoute) 
+                private activatedRoute: ActivatedRoute,
+                private artistsService: ArtistsService,
+                private usersService: UsersService,
+                private collectionsService: CollectionsService,) 
             { }
 
     ngOnInit() 
@@ -53,11 +62,14 @@ export class ArtistComponent implements OnInit {
         else
             this.careerBeginDate = "Unknown";
         
-        this.follows.forEach(element => {
+        let data: Follow[] = this.follows.results;
+        data.forEach(element => {
             if (element.artist.id == this.artist.id) {
                 this.followAction = "Unfollow";
             }
         });
+
+        this.setUpTopTracks();
     }
 
     followArtist()
@@ -89,6 +101,41 @@ export class ArtistComponent implements OnInit {
                         this.followAction = "Follow";
                     }
                 );
+        }
+    }
+
+    setUpTopTracks()
+    {
+        this.artistsService.getTopTracks(this.artist.id)
+            .subscribe(
+                (response) => {
+                    this.topTracks = response;
+                    
+                    this.TrackStatuses();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );   
+    }
+
+    TrackStatuses() {
+        if (this.usersService.IsAuthorized()) {
+            this.collectionsService.getUserCollections()
+            .subscribe(
+                (response: Collection[]) => {
+                    if (response.length > 0) {
+                        response.forEach(element => {
+                                this.topTracks.forEach(track => {
+                                    if (track.id == element.track.id) {
+                                        track.isInLibrary = true;
+                                    }
+                                });
+                            }
+                        )
+                    }
+                }
+            );
         }
     }
 }

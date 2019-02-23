@@ -16,6 +16,8 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { FollowedArtistsComponent } from './followed-artists/followed-artists.component';
+import { CollectionsComponent } from './collections/collections.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     ArtistsComponent,
     ArtistComponent,
     RegistrationComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    FollowedArtistsComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,

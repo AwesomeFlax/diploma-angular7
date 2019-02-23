@@ -1,8 +1,10 @@
-import { UserDTO } from './userDTO.model';
-import { Artist } from './artist.model';
+import { Follow } from './follow.model';
 
-export class Follow
+export class Follows
 {
-    user: UserDTO;
-    artist: Artist;
+    pageNumber: number;
+    pageSize: number;
+    totalNumberOfPages: number;
+    totalNumberOfRecords: number;
+    results: Follow[];
 }

@@ -1,7 +1,8 @@
-import { Follow } from './../models/follows.model';
+import { Follow } from '../models/follow.model';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Follows } from '../models/follows.model';
 
 @Injectable({providedIn: 'root'})
 export class FollowsService 
@@ -44,6 +45,6 @@ export class FollowsService
         }
         
         const userId = localStorage.getItem('userId');
-        return this.httpClient.get<Follow>(`${environment.API_URL}follows/${userId}?page=${pageNumber}`);
+        return this.httpClient.get<Follows>(`${environment.API_URL}follows/${userId}?page=${pageNumber}`);
     }
 }
