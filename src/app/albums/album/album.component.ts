@@ -22,6 +22,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     selectedTrack: Track;
     youtubeLink: SafeResourceUrl;
     subscription: Subscription;
+    releaseDate: string;
 
     constructor(
         private tracksService: TracksService, 
@@ -33,6 +34,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
 
     ngOnInit() {       
         this.album = this.activatedRoute.snapshot.data["album"];
+        this.releaseDate = new Date(this.album.releaseDate).toLocaleDateString();
         this.tracks = this.album.tracks;
         this.selectedTrack = this.tracks[0];
         this.makeYoutubeLink();

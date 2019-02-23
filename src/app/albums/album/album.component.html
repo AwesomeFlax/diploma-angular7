@@ -1,99 +1,34 @@
-<ng-container *ngIf="album; else elseTemplate">                 
-    <!-- <div class="uk-animation-toggle">
-        <a 
-            class="BackToButton" 
-            [routerLink]="['/albums']"
+<div class="row">
+    <h1 class="uk-article-title uk-text-uppercase">
+        {{ album.name }}
+    </h1>
+    <div class="col-lg-5">
+        <img data-src="{{ album.albumCover}}" width="380px" height="380px" alt="" uk-img>
+        <h4 class="my-2  uk-text-uppercase">Tracklist:</h4>
+        <app-track
+            *ngFor="let item of album.tracks" 
+            [track]=item
         >
-            Back to albums
-        </a>
-        
-    </div> -->
-</ng-container>
-<ng-template #elseTemplate>
-    <p>nothing here</p>
-</ng-template> 
-
-<div class="row justify-content-center">
-    <div class="col-lg-10">
-        <div class="mx-auto my-3">
-            <div class="form-control">
-                <div class="row">
-                        <div class="row">
-                                <h3 class="my-auto">
-                                    {{ album.name }}
-                                </h3>
-                                <a class="uk-button uk-button-default" href="">Add</a>
-                            </div>
-                    <div class="col-md-5">
-                        <img data-src="{{ album.albumCover }}" width="350px" height="350px" alt="" uk-img >
-                            <hr>
-                            <div class="column justify-content-between mx-auto">
-                                <h4 class="my-2">Tracklist:</h4>
-                                <app-track
-                                    *ngFor="let item of album.tracks" 
-                                    [track]=item
-                                >
-                                </app-track>
-                            </div>
-                    </div>
-                    <div class="col-md-7">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="information-tab" href="#information" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
-                                    <iframe
-                                        *ngIf="youtubeLink != null"
-                                        [src]="youtubeLink" width="620" height="340" frameborder="0" 
-                                        allowfullscreen  uk-responsive  uk-video="automute: false">
-                                    </iframe>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="information" role="tabpanel" aria-labelledby="information-tab">
-                                <div class="column">
-                                    <div class="row justify-content-center">
-                                        <div class="col-5">
-                                            <p class="lead">Artist:</p>
-                                        </div>
-                                        <div class="col-5">
-                                            <p class="lead">
-                                                <a [routerLink]="['/']">Artist Name</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-5">
-                                            <p class="lead">Genre:</p>
-                                        </div>
-                                        <div class="col-5">
-                                            <p class="lead">{{ album.genre }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-5">
-                                            <p class="lead">Released:</p>
-                                        </div>
-                                        <div class="col-5">
-                                            <p class="lead">Release Date</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                <div class="column">
-                                    <div class="row justify-content-center">
-                                        <div class="col-10">
-                                            <p class="lead">
-                                                {{ album.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </app-track>
+    </div>
+    <div class="col-lg-7">
+        <article class="uk-article">
+            <dl class="uk-description-list uk-description-list-divider">
+                <dt><span class="uk-text-bold">Artist</span></dt>
+                <dd> <a routerLink='/artist/{{ album.artist.id }}' routerLinkActive="router-link-active" >{{ album.artist.nickName }} </a></dd>
+                <dt><span class="uk-text-bold">Release</span></dt>
+                <dd>{{ releaseDate }}</dd>
+                <dt><span class="uk-text-bold">Genre</span></dt>
+                <dd>{{ album.genre }}</dd>
+                <dt><span class="uk-text-bold">Description</span></dt>
+                <dd>{{ album.description }}</dd>
+            </dl>
+        </article>
+        <hr class="uk-divider-icon">
+        <iframe
+            *ngIf="youtubeLink != null"
+            [src]="youtubeLink" width="620" height="340" frameborder="0" 
+            allowfullscreen  uk-responsive  uk-video="automute: false">
+        </iframe>
     </div>
 </div>
