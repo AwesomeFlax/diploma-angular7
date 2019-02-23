@@ -2,7 +2,6 @@ import { Artists } from './../models/artists.model';
 import { Artist } from './../models/artist.model';
 import { Component, OnInit } from '@angular/core';
 import { ArtistsService } from '../services/artist.service';
-import { TouchSequence } from 'selenium-webdriver';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Pager } from '../models/pager.model';

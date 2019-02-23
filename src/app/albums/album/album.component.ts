@@ -6,6 +6,9 @@ import { Album } from 'src/app/models/album.model';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { UsersService } from 'src/app/services/users.service';
+import { CollectionsService } from 'src/app/services/collections.service';
+import { Collection } from 'src/app/models/collections.model';
 
 @Component({
     selector: 'app-album',
@@ -24,11 +27,14 @@ export class AlbumComponent implements OnInit, OnDestroy {
         private tracksService: TracksService, 
         private activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer,
+        private usersService: UsersService,
+        private collectionsService: CollectionsService,
         ) { }
 
     ngOnInit() {       
         this.album = this.activatedRoute.snapshot.data["album"];
-        this.selectedTrack = this.album.tracks[0];
+        this.tracks = this.album.tracks;
+        this.selectedTrack = this.tracks[0];
         this.makeYoutubeLink();
 
         this.tracksService.selectedTrack.subscribe(
@@ -37,6 +43,8 @@ export class AlbumComponent implements OnInit, OnDestroy {
                 this.makeYoutubeLink();
             }
         );
+
+        this.TrackStatuses();
     }
 
     makeYoutubeLink() {
@@ -54,9 +62,30 @@ export class AlbumComponent implements OnInit, OnDestroy {
             });
     }
 
-    ngOnDestroy(): void {
+    ngOnDestroy(): void 
+    {
         if (this.subscription !== undefined) {
             this.subscription.unsubscribe();
+        }
+    }
+
+    TrackStatuses() {
+        if (this.usersService.IsAuthorized()) {
+            this.collectionsService.getUserCollections()
+            .subscribe(
+                (response: Collection[]) => {
+                    if (response.length > 0) {
+                        response.forEach(element => {
+                                this.tracks.forEach(track => {
+                                    if (track.id == element.track.id) {
+                                        track.isInLibrary = true;
+                                    }
+                                });
+                            }
+                        )
+                    }
+                }
+            );
         }
     }
 }

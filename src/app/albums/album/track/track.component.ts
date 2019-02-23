@@ -1,6 +1,10 @@
+import { Collection } from './../../../models/collections.model';
+import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Track } from 'src/app/models/track.model';
 import { TracksService } from '../../../services/tracks.service';
+import { CollectionsService } from 'src/app/services/collections.service';
+import { element, elementStyleProp } from '@angular/core/src/render3';
 
 @Component({
     selector: 'app-track',
@@ -11,13 +15,45 @@ export class TrackComponent implements OnInit {
 
     @Input() track: Track;
     
-    constructor(private tracksService: TracksService) { }
+    constructor(private tracksService: TracksService,
+                private usersService: UsersService,
+                private collectionsService: CollectionsService) { }
 
-    ngOnInit() {
+    ngOnInit() 
+    {
     }
 
     onTrackClick(track: Track)
     {
         this.tracksService.selectedTrack.emit(this.track);
+        this.usersService.IsAuthorized();
+    }
+
+    addTrack()
+    {
+        this.collectionsService.addTrackInCollection(this.track.id)
+            .subscribe(
+                (response) => {
+                    this.track.isInLibrary = !this.track.isInLibrary;
+                },
+                (error) => {
+                    console.log(error);
+                    this.track.isInLibrary = !this.track.isInLibrary;
+                }
+            );
+    }
+
+    removeTrack()
+    {
+        this.collectionsService.removeTrackFromCollection(this.track.id)
+            .subscribe(
+                (response) => {
+                    this.track.isInLibrary = !this.track.isInLibrary;                    
+                },
+                (error) => {
+                    console.log(error);
+                    this.track.isInLibrary = !this.track.isInLibrary;                    
+                }
+            );
     }
 }

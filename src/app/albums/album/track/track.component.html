@@ -1,9 +1,18 @@
-<div
-    class="row"
-    (click)="onTrackClick(track)"
->
-    <a class="uk-link-heading">
-        <span class="uk-margin-small-right" uk-icon="icon: play; ratio: 1.5"></span>
-        {{ track.name }}
-    </a>
+<div class="row">
+    <div class="col-lg-10">
+        <div class="inline" (click)="onTrackClick(track)">
+            <a class="uk-link-heading">
+                <span class="uk-margin-small-right" uk-icon="icon: play; ratio: 1.5"></span>
+                {{ track.name }}
+            </a>
+        </div>
+    </div>
+    <div>
+        <a class="uk-link-heading">
+            <span *ngIf="!track.isInLibrary" (click)="addTrack()" class="uk-margin-small-right" uk-icon="icon: plus-circle; ratio: 1"></span>
+        </a>
+        <a class="uk-link-heading">
+            <span *ngIf="track.isInLibrary" (click)="removeTrack()" class="uk-margin-small-right" uk-icon="icon: minus-circle; ratio: 1"></span>
+        </a>
+    </div>
 </div>

@@ -10,12 +10,13 @@ import { ArtistResolveService } from './resolve-services/artist.resolve.service'
 import { ArtistsResolveService } from './resolve-services/artists.resolve.service';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthorizationComponent } from './user/authorization/authorization.component';
+import { FollowsResolveService } from './resolve-services/follows.resolve.service';
 
 const routes: Routes = [
     { path: 'albums', component: AlbumsComponent, resolve: { albums: AlbumsResolveService } },
     { path: 'album/:id', component: AlbumComponent, resolve: { album: AlbumResolveService } },
     { path: 'artists', component: ArtistsComponent, resolve: { artists: ArtistsResolveService } },
-    { path: 'artist/:id', component: ArtistComponent, resolve: { artist: ArtistResolveService } },
+    { path: 'artist/:id', component: ArtistComponent, resolve: { artist: ArtistResolveService, follows: FollowsResolveService } },
     { path: 'registration', component: RegistrationComponent },
     { path: 'authorization', component: AuthorizationComponent }
 

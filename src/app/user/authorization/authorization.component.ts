@@ -20,9 +20,6 @@ export class AuthorizationComponent implements OnInit {
         const login = this.login.nativeElement.value;
         const password = this.pass.nativeElement.value;
 
-        console.log(login);
-        console.log(password);
-
         this.usersService.Authorize(login, password)
             .subscribe(
                 (response: any) => {

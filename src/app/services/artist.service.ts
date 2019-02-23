@@ -6,10 +6,8 @@ import { Pager } from '../models/pager.model';
 import { Artists } from '../models/artists.model';
 
 @Injectable({providedIn: 'root'})
-export class ArtistsService {
-
-    //artists: Artist[] = []; 
-
+export class ArtistsService 
+{
     constructor(private httpClient: HttpClient) { }
 
     getArtists(pageNumber?: number)
