@@ -14,7 +14,7 @@
                         class="uk-input uk-form-width-large" 
                         required 
                         name="nickName" 
-                        id="nickName" 
+                        id="username" 
                         [(ngModel)]="user.nickName" 
                         ngDefaultControl 
                         type="text" 
@@ -126,6 +126,7 @@
     <div class="uk-inline uk-margin">
         <span class="uk-form-icon" uk-icon="icon: link"></span>
         <input
+            style="width: 850px"
             class="uk-input" 
             [(ngModel)]="user.userPhotoUrl" 
             ngDefaultControl 
@@ -142,7 +143,12 @@
             >
                 Register
             </button>
-            <button class="uk-button uk-button-default uk-align-right uk-text-uppercase">Back</button>
+            <button 
+                class="uk-button uk-button-default uk-align-right uk-text-uppercase"
+                [routerLink]="['/artists']"
+            >
+                Back
+            </button>
         </div>
     </div>
 </form>

@@ -20,10 +20,5 @@ export class FollowsResolveService implements Resolve<Follows> {
             {
                 return this.followsService.getFollowedArtists();
             }
-            else
-            {
-                this.usersService.SuggestAuth();
-                // this.router.navigateByUrl('authorization');
-            }
         }
 }

@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ArtistResolveService implements Resolve<Artist> {
+    
     constructor(private artistsService: ArtistsService) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<Artist>|Promise<Artist>|Artist {
-        return this.artistsService.getArtistById(route.params["id"]);
-    }
+            state: RouterStateSnapshot): Observable<Artist>|Promise<Artist>|Artist 
+        {
+            return this.artistsService.getArtistById(route.params["id"]);
+        }
 }

@@ -20,10 +20,5 @@ export class CollectionsResolveService implements Resolve<Collection[]> {
             {
                 return this.collectionsService.getUserCollections();
             }
-            else
-            {
-                this.usersService.SuggestAuth();
-                // this.router.navigateByUrl('authorization');
-            }
         }
 }

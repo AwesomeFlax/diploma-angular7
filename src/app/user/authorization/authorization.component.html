@@ -40,9 +40,14 @@
             class="uk-button uk-align-right uk-button-primary"
             (click)="Authorize()"
         >
-                Login
-            </button>
-            <button class="uk-button uk-button-default uk-align-right uk-text-uppercase">Back</button>
+            Login
+        </button>
+        <button 
+            class="uk-button uk-button-default uk-align-right uk-text-uppercase"
+            [routerLink]="['/artists']"
+        >
+            Back
+        </button>
         </div>
     </div>
 </form>

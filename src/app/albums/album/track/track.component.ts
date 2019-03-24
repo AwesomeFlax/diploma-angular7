@@ -47,7 +47,7 @@ export class TrackComponent implements OnInit {
         }
         else
         {
-            this.usersService.SuggestAuth();
+             this.usersService.SuggestAuth();
             // this.router.navigateByUrl('authorization');
         }
     }
@@ -69,8 +69,8 @@ export class TrackComponent implements OnInit {
         }   
         else
         {
-            this.usersService.SuggestAuth();
-            //this.router.navigateByUrl('authorization');
+             this.usersService.SuggestAuth();
+            // this.router.navigateByUrl('authorization');
         }
     }
 }
