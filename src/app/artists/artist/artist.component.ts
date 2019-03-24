@@ -42,7 +42,11 @@ export class ArtistComponent implements OnInit {
     ngOnInit() 
     {
         this.artist = this.activatedRoute.snapshot.data["artist"];        
-        this.follows = this.activatedRoute.snapshot.data["follows"];        
+        if (this.usersService.IsAuthorized())
+        {
+            this.follows = this.activatedRoute.snapshot.data["follows"];        
+        }
+
         this.albums = this.artist.albums;
 
         this.birthDate = new Date(this.artist.birthDate).toLocaleDateString();
@@ -62,21 +66,26 @@ export class ArtistComponent implements OnInit {
         else
             this.careerBeginDate = "Unknown";
         
-        let data: Follow[] = this.follows.results;
-        data.forEach(element => {
-            if (element.artist.id == this.artist.id) {
-                this.followAction = "Unfollow";
-            }
-        });
-
+        if (this.usersService.IsAuthorized())
+        {
+            let data: Follow[] = this.follows.results;
+            data.forEach(element => {
+                if (element.artist.id == this.artist.id) {
+                    this.followAction = "Unfollow";
+                }
+            });
+        }
+            
         this.setUpTopTracks();
     }
 
     followArtist()
     {
-        if (this.followAction == "Follow")
+        if (this.usersService.IsAuthorized())
         {
-            this.followsService.followArtist(this.artist.id)
+            if (this.followAction == "Follow")
+            {
+                this.followsService.followArtist(this.artist.id)
                 .subscribe(
                     (response) => {
                         console.log(response)
@@ -87,20 +96,25 @@ export class ArtistComponent implements OnInit {
                         this.followAction = "Unfollow";
                     }
                 );
+            }
+            else
+            {
+                this.followsService.unfollowArtist(this.artist.id)
+                .subscribe(
+                    (response) => {
+                        console.log(response)
+                        this.followAction = "Follow";
+                    },
+                    (error: Error) => {
+                        console.log(error.message)
+                        this.followAction = "Follow";
+                    }
+                );
+            }
         }
         else
         {
-            this.followsService.unfollowArtist(this.artist.id)
-                .subscribe(
-                    (response) => {
-                        console.log(response)
-                        this.followAction = "Follow";
-                    },
-                    (error: Error) => {
-                        console.log(error.message)
-                        this.followAction = "Follow";
-                    }
-                );
+            this.usersService.SuggestAuth();
         }
     }
 
@@ -109,8 +123,7 @@ export class ArtistComponent implements OnInit {
         this.artistsService.getTopTracks(this.artist.id)
             .subscribe(
                 (response) => {
-                    this.topTracks = response;
-                    
+                    this.topTracks = response;  
                     this.TrackStatuses();
                 },
                 (error) => {
@@ -119,8 +132,10 @@ export class ArtistComponent implements OnInit {
             );   
     }
 
-    TrackStatuses() {
-        if (this.usersService.IsAuthorized()) {
+    TrackStatuses() 
+    {
+        if (this.usersService.IsAuthorized()) 
+        {
             this.collectionsService.getUserCollections()
             .subscribe(
                 (response: Collection[]) => {

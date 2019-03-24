@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Collection } from './../../../models/collections.model';
 import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -17,7 +18,8 @@ export class TrackComponent implements OnInit {
     
     constructor(private tracksService: TracksService,
                 private usersService: UsersService,
-                private collectionsService: CollectionsService) { }
+                private collectionsService: CollectionsService,
+                private router: Router) { }
 
     ngOnInit() 
     {
@@ -26,12 +28,13 @@ export class TrackComponent implements OnInit {
     onTrackClick(track: Track)
     {
         this.tracksService.selectedTrack.emit(this.track);
-        this.usersService.IsAuthorized();
     }
 
     addTrack()
     {
-        this.collectionsService.addTrackInCollection(this.track.id)
+        if (this.usersService.IsAuthorized())
+        {
+            this.collectionsService.addTrackInCollection(this.track.id)
             .subscribe(
                 (response) => {
                     this.track.isInLibrary = !this.track.isInLibrary;
@@ -41,11 +44,19 @@ export class TrackComponent implements OnInit {
                     this.track.isInLibrary = !this.track.isInLibrary;
                 }
             );
+        }
+        else
+        {
+            this.usersService.SuggestAuth();
+            // this.router.navigateByUrl('authorization');
+        }
     }
 
     removeTrack()
     {
-        this.collectionsService.removeTrackFromCollection(this.track.id)
+        if (this.usersService.IsAuthorized())
+        {
+            this.collectionsService.removeTrackFromCollection(this.track.id)
             .subscribe(
                 (response) => {
                     this.track.isInLibrary = !this.track.isInLibrary;                    
@@ -55,5 +66,11 @@ export class TrackComponent implements OnInit {
                     this.track.isInLibrary = !this.track.isInLibrary;                    
                 }
             );
+        }   
+        else
+        {
+            this.usersService.SuggestAuth();
+            //this.router.navigateByUrl('authorization');
+        }
     }
 }

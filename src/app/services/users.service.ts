@@ -5,6 +5,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { elementStyleProp } from "@angular/core/src/render3";
 import { Router } from "@angular/router";
+import UIkit from 'uikit';
 
 @Injectable({providedIn: 'root'})
 export class UsersService 
@@ -12,7 +13,8 @@ export class UsersService
     helper = new JwtHelperService();
     userName = new EventEmitter<string>();
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient,
+                private router: Router) {}
 
     CreateAccount(user: UserDTO)
     {
@@ -35,12 +37,19 @@ export class UsersService
         localStorage.setItem('userId', decodedToken.nameid);
         
         this.userName.emit(localStorage.getItem('name'));
+        UIkit.notification({message: `Welcome, ${decodedToken.unique_name}!`, status: 'success', pos: 'bottom-left'});
+    }
+
+    LogOut()
+    {
+        localStorage.clear();
+        this.userName.emit("");
     }
 
     IsAuthorized(): boolean
     {
         const token: any = localStorage.getItem('token');
-        if (token.length > 0)
+        if (token != undefined && token.length > 0)
         {
             const decodedToken = this.helper.decodeToken(token);
             
@@ -53,6 +62,13 @@ export class UsersService
                 return false;
             }
         }
+
         return false;
+    }
+
+    SuggestAuth()
+    {
+        this.router.navigateByUrl('authorization');
+        UIkit.notification({message: `You need to login to complete this action`, status: 'danger', pos: 'bottom-left'});
     }
 }

@@ -1,3 +1,4 @@
+import { UsersService } from './../services/users.service';
 import { Follow } from '../models/follow.model';
 import { FollowsService } from './../services/follows.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,6 +24,7 @@ export class FollowedArtistsComponent implements OnInit {
     
     constructor(private activatedRoute: ActivatedRoute,
                 private artistsService: ArtistsService,
+                private usersService: UsersService,
                 private followsService: FollowsService
                 ) { }
 

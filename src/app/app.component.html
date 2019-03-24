@@ -21,13 +21,12 @@
                     <li class="uk-nav-header">Account</li>
                         <li><a href="" [routerLink]="['/authorization']"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> Sign In</a></li>
                         <li><a href="" [routerLink]="['/registration']"><span class="uk-margin-small-right" uk-icon="icon: arrow-right"></span> Sign Up</a></li>
-                    <br> <li class="uk-nav-divider"></li> <br>
+                    <br> <li *ngIf="loggedIn" class="uk-nav-divider"></li> <br>
 
-                    <li class="uk-parent">
-                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: user"></span> {{ userName }} </a>
+                    <li *ngIf="loggedIn" class="uk-parent">
+                        <a href=""><span class="uk-margin-small-right" uk-icon="icon: user"></span> {{ userName }} </a>
                         <ul class="uk-nav-sub">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Log out</a></li>
+                            <li><a (click)="logOut()">Log out</a></li>
                         </ul>
                     </li>
                 </ul> 

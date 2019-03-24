@@ -1,6 +1,7 @@
 import { UsersService } from './services/users.service';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import UIkit from 'uikit';
 
 @Component({
         selector: 'app-root',
@@ -19,9 +20,10 @@ export class AppComponent implements OnInit{
 	
 	ngOnInit() 
 	{
-		if (localStorage.getItem('name').length > 0)
+		if (this.usersSerivce.IsAuthorized())
 		{
 			this.userName = localStorage.getItem('name');
+			this.loggedIn = true;
 		}
 
 		this.router.events.subscribe((value: any) => this.checkRouterEvent(value));
@@ -35,6 +37,14 @@ export class AppComponent implements OnInit{
 			);
 	}
 	
+	logOut() {
+		this.usersSerivce.LogOut();
+		this.userName = "";
+		this.loggedIn = false;
+
+        UIkit.notification({message: `See you later!`, status: 'success', pos: 'bottom-left'});
+	}
+
 	private checkRouterEvent(routerEvent: Event): void 
 	{
 		if (routerEvent instanceof NavigationStart) 

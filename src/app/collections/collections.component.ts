@@ -1,3 +1,4 @@
+import { UsersService } from './../services/users.service';
 import { Collection } from 'src/app/models/collections.model';
 import { AlbumsService } from '../services/albums.service';
 import { Album } from './../models/album.model';
@@ -21,22 +22,27 @@ export class CollectionsComponent implements OnInit
     constructor(
         private albumsService: AlbumsService,
         private trackService: TracksService, 
+        private usersService: UsersService, 
         private activatedRoute: ActivatedRoute
         ) { }
     
     ngOnInit() {
-        const result: Album[] = [];
-        let response: Collection[] = this.activatedRoute.snapshot.data["collections"];
-        response.forEach(element => {
-            result.push(element.track.album)
-        });
 
-        const map = new Map();
-        for (const item of result) {
-            if(!map.has(item.id))
-            {
-                map.set(item.id, true);
-                this.albumsList.push(item);
+        if (this.usersService.IsAuthorized())
+        {   
+            const result: Album[] = [];
+            let response: Collection[] = this.activatedRoute.snapshot.data["collections"];
+            response.forEach(element => {
+                result.push(element.track.album)
+            });
+            
+            const map = new Map();
+            for (const item of result) {
+                if(!map.has(item.id))
+                {
+                    map.set(item.id, true);
+                    this.albumsList.push(item);
+                }
             }
         }
     }
